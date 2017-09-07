@@ -39,9 +39,11 @@ public class ExpHashMap<K, V> implements Runnable {
     public void run() {
         while(true){
             while(true) {
+                synchronized (lock) {
                     if (hm.keySet().size() != 0) {
                         break;
                     }
+                }
             }
             TimedKey<K> nextKey = pq.peek();
             while(System.currentTimeMillis() < nextKey.getExp()) {
